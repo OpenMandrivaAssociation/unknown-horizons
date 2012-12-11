@@ -1,18 +1,18 @@
 %define icon_name      uk
 
 Name:		unknown-horizons
-Version:	2011.2
-Release:	%mkrel 1
+Version:	2012.1
+Release:	1
 License:	GPLv2+ ; CC-BY-SA 3.0 ; OFL ;
 Summary:	A popular economy and city building 2D RTS game
 Url:		http://www.unknown-horizons.org
 Group:		Games/Strategy
-Source:		%{name}-%{version}.tar.bz2
+Source:		%{name}-%{version}.tar.xz
 Source1:	%{name}.svg
 # Required, docbook-xsl-stylesheets : to build man page
 BuildRequires:	docbook-style-xsl
 BuildRequires:	fdupes
-BuildRequires:	fife-devel
+BuildRequires:	fife-devel >= 0.3.3
 BuildRequires:	intltool
 # Required, libxslt : to build man page
 BuildRequires:	xsltproc
@@ -26,6 +26,8 @@ BuildRequires:	imagemagick
 Requires:	fife
 Requires:	python
 Requires:	python-yaml
+Requires:	%{name}-data = %{version}
+BuildArch:	noarch
 
 %description
 Unknown Horizons is a 2D real-time strategy simulation with an emphasis
@@ -34,21 +36,30 @@ and wealthy colony, collect taxes and supply your inhabitants with
 valuable goods. Increase your power with a well balanced economy and
 with strategic trade and diplomacy.
 
+%package data
+Summary:	Games data for the %{name} game
+Group:		Games/Arcade
+Conflicts:	%{name} < 2012.1
+Requires:	%{name} = %{version}
+BuildArch:	noarch
+
+%description data
+This package contains data files for %{name} game.
+
 %prep
 %setup -q -n %{name}
 
 %build
 # Build Unknown Horizons
-%{__python} setup.py build
+python setup.py build
 
 %install
-rm -rf %{buildroot}
-%{__python} setup.py install \
+python setup.py install \
   --prefix=%{_prefix} \
   --root=%{buildroot}
 %find_lang %{name}
 
-%{__rm} %{buildroot}%{_datadir}/pixmaps/%{name}.xpm
+rm %{buildroot}%{_datadir}/pixmaps/%{name}.xpm
 # KDE has problems handling icon files starting with 'unknown' followed by a dash
 # (ex: unknown-horizons.svg) and displays unknown.* icon. We fix this by changing
 # the icon name in .desktop file.
@@ -60,19 +71,15 @@ desktop-file-install --vendor="" \
                      --remove-category="Simulation" \
                      %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-%clean
-rm -rf %{buildroot}
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc doc/AUTHORS doc/GPL doc/GPL_fontexception doc/LICENSE doc/CC doc/OFL
 %{_bindir}/%{name}
 %{_mandir}/man6/%{name}.6.*
 %{python_sitelib}/*.egg-info
 %{python_sitelib}/horizons/
-%dir %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{icon_name}.svg
-%{_datadir}/%{name}/settings-dist.xml
-%{_datadir}/%{name}/content/
+
+%files data
+%{_datadir}/%{name}
 
