@@ -1,18 +1,18 @@
 %define icon_name      uk
 
 Name:		unknown-horizons
-Version:	2012.1
+Version:	2013.1b
 Release:	1
-License:	GPLv2+ ; CC-BY-SA 3.0 ; OFL ;
 Summary:	A popular economy and city building 2D RTS game
-Url:		http://www.unknown-horizons.org
+License:	GPLv2+ ; CC-BY-SA 3.0 ; OFL ;
 Group:		Games/Strategy
+Url:		http://www.unknown-horizons.org
 Source:		%{name}-%{version}.tar.xz
 Source1:	%{name}.svg
 # Required, docbook-xsl-stylesheets : to build man page
 BuildRequires:	docbook-style-xsl
 BuildRequires:	fdupes
-BuildRequires:	fife-devel >= 0.3.3
+BuildRequires:	fife-devel >= 0.3.4
 BuildRequires:	intltool
 # Required, libxslt : to build man page
 BuildRequires:	xsltproc
@@ -38,7 +38,6 @@ with strategic trade and diplomacy.
 
 %package data
 Summary:	Games data for the %{name} game
-Group:		Games/Arcade
 Conflicts:	%{name} < 2012.1
 Requires:	%{name} = %{version}
 BuildArch:	noarch
@@ -57,7 +56,7 @@ python setup.py build
 python setup.py install \
   --prefix=%{_prefix} \
   --root=%{buildroot}
-%find_lang %{name}
+%find_lang %{name} %{name}-server %{name}.lang
 
 rm %{buildroot}%{_datadir}/pixmaps/%{name}.xpm
 # KDE has problems handling icon files starting with 'unknown' followed by a dash
@@ -72,13 +71,13 @@ desktop-file-install --vendor="" \
                      %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 %files -f %{name}.lang
-%doc doc/AUTHORS doc/GPL doc/GPL_fontexception doc/LICENSE doc/CC doc/OFL
+%doc doc/AUTHORS.md doc/GPL doc/GPL_fontexception doc/LICENSE doc/CC doc/OFL doc/CHANGELOG
 %{_bindir}/%{name}
 %{_mandir}/man6/%{name}.6.*
 %{python_sitelib}/*.egg-info
 %{python_sitelib}/horizons/
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/scalable/apps/%{icon_name}.svg
+%{_iconsdir}/hicolor/scalable/apps/%{icon_name}.svg
 
 %files data
 %{_datadir}/%{name}
