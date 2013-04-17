@@ -1,13 +1,14 @@
 %define icon_name      uk
 
 Name:		unknown-horizons
-Version:	2013.1b
+Version:	2013.2
 Release:	1
 Summary:	A popular economy and city building 2D RTS game
 License:	GPLv2+ ; CC-BY-SA 3.0 ; OFL ;
 Group:		Games/Strategy
 Url:		http://www.unknown-horizons.org
-Source:		%{name}-%{version}.tar.xz
+# From github's tag
+Source:		%{name}-%{version}.zip
 Source1:	%{name}.svg
 # Required, docbook-xsl-stylesheets : to build man page
 BuildRequires:	docbook-style-xsl
@@ -46,7 +47,7 @@ BuildArch:	noarch
 This package contains data files for %{name} game.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 # Build Unknown Horizons
