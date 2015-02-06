@@ -2,7 +2,7 @@
 
 Name:		unknown-horizons
 Version:	2013.2
-Release:	1
+Release:	2
 Summary:	A popular economy and city building 2D RTS game
 License:	GPLv2+ ; CC-BY-SA 3.0 ; OFL ;
 Group:		Games/Strategy
