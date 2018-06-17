@@ -12,6 +12,7 @@ License:	GPL
 Group:		System/Libraries
 BuildRequires:	python2-fifengine
 BuildRequires:	python2-setuptools
+BuildRequires:	gettext
 BuildRequires:	pkgconfig(python2)
 Requires:	python2
 Requires:	python2-fifengine
