@@ -4,7 +4,7 @@
 
 Name:		unknown-horizons
 Version:	2017.2
-Release:	1
+Release:	2
 Source0:	https://github.com/unknown-horizons/unknown-horizons/releases/download/%{version}/unknown-horizons-%{version}.tar.xz
 Summary:	2D Realtime Strategy Simulation
 URL:		https://unknown-horizons.org/
