@@ -28,7 +28,7 @@ Increase your power with a well balanced economy and with strategic trade
 and diplomacy.
 
 %prep
-%autosetup -p1 -n %{name}
+%autosetup -p1 -n %{name}-%{version}
 
 %build
 python2 setup.py build
