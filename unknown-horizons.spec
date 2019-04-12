@@ -3,9 +3,9 @@
 %define devname %mklibname fife -d
 
 Name:		unknown-horizons
-Version:	2017.2
-Release:	2
-Source0:	https://github.com/unknown-horizons/unknown-horizons/releases/download/%{version}/unknown-horizons-%{version}.tar.xz
+Version:	2019.1
+Release:	1
+Source0:	https://github.com/unknown-horizons/unknown-horizons/releases/download/%{version}/unknown-horizons-%{version}.tar.gz
 Summary:	2D Realtime Strategy Simulation
 URL:		https://unknown-horizons.org/
 License:	GPL
