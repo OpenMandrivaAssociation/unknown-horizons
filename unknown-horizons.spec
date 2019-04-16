@@ -10,12 +10,12 @@ Summary:	2D Realtime Strategy Simulation
 URL:		https://unknown-horizons.org/
 License:	GPL
 Group:		System/Libraries
-BuildRequires:	python2-fifengine
-BuildRequires:	python2-setuptools
+BuildRequires:	python-fifengine
+BuildRequires:	python-setuptools
 BuildRequires:	gettext
-BuildRequires:	pkgconfig(python2)
-Requires:	python2
-Requires:	python2-fifengine
+BuildRequires:	pkgconfig(python)
+Requires:	python
+Requires:	python-fifengine
 
 %description
 A 2D realtime strategy simulation with an emphasis on economy and city
@@ -31,10 +31,10 @@ and diplomacy.
 %autosetup -p1 -n %{name}-%{version}
 
 %build
-python2 setup.py build
+python setup.py build
 
 %install
-python2 setup.py install --root=%{buildroot}
+python setup.py install --root=%{buildroot}
 
 %find_lang %{name}
 %find_lang %{name}-server
@@ -45,5 +45,5 @@ python2 setup.py install --root=%{buildroot}
 %{_datadir}/unknown-horizons
 %{_datadir}/pixmaps/unknown-horizons.xpm
 %{_mandir}/man6/unknown-horizons.6*
-%{python2_sitelib}/horizons
-%{python2_sitelib}/UnknownHorizons*.egg-info
+%{python_sitelib}/horizons
+%{python_sitelib}/UnknownHorizons*.egg-info
