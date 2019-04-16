@@ -10,12 +10,15 @@ Summary:	2D Realtime Strategy Simulation
 URL:		https://unknown-horizons.org/
 License:	GPL
 Group:		System/Libraries
-BuildRequires:	python2-fifengine
-BuildRequires:	python2-setuptools
+BuildRequires:  desktop-file-utils
+BuildRequires:  intltool
+BuildRequires:	python-fifengine
+BuildRequires:	python-setuptools
 BuildRequires:	gettext
-BuildRequires:	pkgconfig(python2)
-Requires:	python2
-Requires:	python2-fifengine
+BuildRequires:	pkgconfig(python)
+BuildRequires:  python-pillow
+Requires:	python
+Requires:	python-fifengine
 
 %description
 A 2D realtime strategy simulation with an emphasis on economy and city
@@ -31,19 +34,42 @@ and diplomacy.
 %autosetup -p1 -n %{name}-%{version}
 
 %build
-python2 setup.py build
+%py3_build
+
+# force generation of atlas.sql
+python3 horizons/engine/generate_atlases.py 2048
 
 %install
-python2 setup.py install --root=%{buildroot}
+%py3_install
 
-%find_lang %{name}
-%find_lang %{name}-server
+desktop-file-install --dir %{buildroot}%{_datadir}/applications build/share/applications/unknown-horizons.desktop
 
-%files -f %{name}.lang -f %{name}-server.lang
+cd %{buildroot}
+find . -name "*.mo" |while read r; do
+	L=`echo $r |cut -d/ -f7`
+	echo "%%lang($L) /$(echo $r |cut -d/ -f2-)" >>%{name}.lang
+done
+cd -
+mv %{buildroot}/%{name}.lang .
+
+%files -f %{name}.lang
 %{_bindir}/unknown-horizons
 %{_datadir}/applications/unknown-horizons.desktop
-%{_datadir}/unknown-horizons
+%dir %{_datadir}/unknown-horizons
+%{_datadir}/unknown-horizons/*.xml
+%dir %{_datadir}/unknown-horizons/content
+%{_datadir}/unknown-horizons/content/*.*
+%{_datadir}/unknown-horizons/content/audio
+%{_datadir}/unknown-horizons/content/fonts
+%{_datadir}/unknown-horizons/content/gfx
+%{_datadir}/unknown-horizons/content/gui
+%dir %{_datadir}/unknown-horizons/content/lang
+%{_datadir}/unknown-horizons/content/lang/*.*
+%{_datadir}/unknown-horizons/content/maps
+%{_datadir}/unknown-horizons/content/objects
+%{_datadir}/unknown-horizons/content/packages
+%{_datadir}/unknown-horizons/content/scenarios
 %{_datadir}/pixmaps/unknown-horizons.xpm
 %{_mandir}/man6/unknown-horizons.6*
-%{python2_sitelib}/horizons
-%{python2_sitelib}/UnknownHorizons*.egg-info
+%{python_sitelib}/horizons
+%{python_sitelib}/UnknownHorizons*.egg-info
