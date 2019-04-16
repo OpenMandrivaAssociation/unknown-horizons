@@ -14,6 +14,7 @@ BuildRequires:	python-fifengine
 BuildRequires:	python-setuptools
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(python)
+BuildRequires:  python-pillow
 Requires:	python
 Requires:	python-fifengine
 
@@ -31,10 +32,10 @@ and diplomacy.
 %autosetup -p1 -n %{name}-%{version}
 
 %build
-python setup.py build
+%py3_build build_i18n
 
 %install
-python setup.py install --root=%{buildroot}
+%py3_install --root=%{buildroot}
 
 %find_lang %{name}
 %find_lang %{name}-server
