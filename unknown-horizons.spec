@@ -10,6 +10,7 @@ Summary:	2D Realtime Strategy Simulation
 URL:		https://unknown-horizons.org/
 License:	GPL
 Group:		System/Libraries
+BuildRequires:  desktop-file-utils
 BuildRequires:  intltool
 BuildRequires:	python-fifengine
 BuildRequires:	python-setuptools
@@ -35,8 +36,13 @@ and diplomacy.
 %build
 %py3_build build_i18n
 
+# force generation of atlas.sql
+python3 horizons/engine/generate_atlases.py 2048
+
 %install
 %py3_install --root=%{buildroot}
+
+desktop-file-install --dir %{buildroot}%{_datadir}/applications build/share/applications/unknown-horizons.desktop
 
 %find_lang %{name}
 %find_lang %{name}-server
