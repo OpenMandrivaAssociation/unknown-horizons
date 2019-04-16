@@ -34,7 +34,7 @@ and diplomacy.
 %autosetup -p1 -n %{name}-%{version}
 
 %build
-%py3_build build_i18n
+%py3_build
 
 # force generation of atlas.sql
 python3 horizons/engine/generate_atlases.py 2048
