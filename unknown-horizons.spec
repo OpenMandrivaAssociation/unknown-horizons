@@ -44,13 +44,31 @@ python3 horizons/engine/generate_atlases.py 2048
 
 desktop-file-install --dir %{buildroot}%{_datadir}/applications build/share/applications/unknown-horizons.desktop
 
-%find_lang %{name}
-%find_lang %{name}-server
+cd %{buildroot}
+find . -name "*.mo" |while read r; do
+	L=`echo $r |cut -d/ -f7`
+	echo "%%lang($L) /$(echo $r |cut -d/ -f2-)" >>%{name}.lang
+done
+cd -
+mv %{buildroot}/%{name}.lang .
 
-%files -f %{name}.lang -f %{name}-server.lang
+%files -f %{name}.lang
 %{_bindir}/unknown-horizons
 %{_datadir}/applications/unknown-horizons.desktop
-%{_datadir}/unknown-horizons
+%dir %{_datadir}/unknown-horizons
+%{_datadir}/unknown-horizons/*.xml
+%dir %{_datadir}/unknown-horizons/content
+%{_datadir}/unknown-horizons/content/*.*
+%{_datadir}/unknown-horizons/content/audio
+%{_datadir}/unknown-horizons/content/fonts
+%{_datadir}/unknown-horizons/content/gfx
+%{_datadir}/unknown-horizons/content/gui
+%dir %{_datadir}/unknown-horizons/content/lang
+%{_datadir}/unknown-horizons/content/lang/*.*
+%{_datadir}/unknown-horizons/content/maps
+%{_datadir}/unknown-horizons/content/objects
+%{_datadir}/unknown-horizons/content/packages
+%{_datadir}/unknown-horizons/content/scenarios
 %{_datadir}/pixmaps/unknown-horizons.xpm
 %{_mandir}/man6/unknown-horizons.6*
 %{python_sitelib}/horizons
