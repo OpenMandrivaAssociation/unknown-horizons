@@ -40,7 +40,7 @@ and diplomacy.
 python3 horizons/engine/generate_atlases.py 2048
 
 %install
-%py3_install --root=%{buildroot}
+%py3_install
 
 desktop-file-install --dir %{buildroot}%{_datadir}/applications build/share/applications/unknown-horizons.desktop
 
