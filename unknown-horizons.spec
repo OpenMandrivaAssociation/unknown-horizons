@@ -10,6 +10,7 @@ Summary:	2D Realtime Strategy Simulation
 URL:		https://unknown-horizons.org/
 License:	GPL
 Group:		System/Libraries
+BuildRequires:  intltool
 BuildRequires:	python-fifengine
 BuildRequires:	python-setuptools
 BuildRequires:	gettext
