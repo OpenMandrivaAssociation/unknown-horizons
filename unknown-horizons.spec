@@ -4,7 +4,7 @@
 
 Name:		unknown-horizons
 Version:	2019.1
-Release:	1
+Release:	2
 Source0:	https://github.com/unknown-horizons/unknown-horizons/releases/download/%{version}/unknown-horizons-%{version}.tar.gz
 Summary:	2D Realtime Strategy Simulation
 URL:		https://unknown-horizons.org/
@@ -19,6 +19,7 @@ BuildRequires:	pkgconfig(python)
 BuildRequires:  python-pillow
 Requires:	python
 Requires:	python-fifengine
+Requires:	python-future
 
 %description
 A 2D realtime strategy simulation with an emphasis on economy and city
