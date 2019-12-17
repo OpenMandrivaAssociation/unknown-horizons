@@ -1,0 +1,32 @@
+diff -Nrup a/requirements.txt b/requirements.txt
+--- a/requirements.txt	2019-01-12 16:15:42.000000000 +0100
++++ b/requirements.txt	2019-10-03 07:12:33.594646062 +0200
+@@ -1,6 +1,7 @@
+ coverage==4.4.1
+ coveralls==1.1
+ crayons==0.1.2
++distro
+ future==0.16.0
+ greenlet==0.4.12
+ isort==4.3.4
+diff -Nrup a/setup.py b/setup.py
+--- a/setup.py	2019-10-03 07:18:38.000000000 +0200
++++ b/setup.py	2019-10-03 07:19:59.039779252 +0200
+@@ -32,6 +32,8 @@ from distutils.core import setup
+ from distutils.spawn import find_executable
+ from shutil import copytree, rmtree
+ 
++import distro
++
+ import horizons
+ from horizons.constants import VERSION
+ from horizons.ext import polib
+@@ -39,7 +41,7 @@ from horizons.ext import polib
+ # Ensure we are in the correct directory
+ os.chdir(os.path.realpath(os.path.dirname(__file__)))
+ 
+-if platform.dist()[0].lower() in ('debian', 'ubuntu'):
++if distro.linux_distribution(full_distribution_name=False)[0] in ('debian', 'openmandriva', 'ubuntu'):
+ 	executable_path = 'games'
+ else:
+ 	executable_path = 'bin'
