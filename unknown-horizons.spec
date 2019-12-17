@@ -18,6 +18,7 @@ BuildRequires:	python-setuptools
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(python)
 BuildRequires:  python-pillow
+BuildRequires:  python-distro
 Requires:	python
 Requires:	python-fifengine
 Requires:	python-future
