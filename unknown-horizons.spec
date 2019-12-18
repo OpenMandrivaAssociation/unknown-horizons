@@ -56,7 +56,7 @@ cd -
 mv %{buildroot}/%{name}.lang .
 
 %files -f %{name}.lang
-#{_bindir}/unknown-horizons
+%{_gamesbindir}/%{name}
 %{_datadir}/applications/unknown-horizons.desktop
 %dir %{_datadir}/unknown-horizons
 %{_datadir}/unknown-horizons/*.xml
