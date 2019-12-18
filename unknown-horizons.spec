@@ -6,6 +6,7 @@ Name:		unknown-horizons
 Version:	2019.1
 Release:	3
 Source0:	https://github.com/unknown-horizons/unknown-horizons/releases/download/%{version}/unknown-horizons-%{version}.tar.gz
+Patch0:		unknown-horizons-2019.1-replace-deprecated-to-distro-package.patch
 Summary:	2D Realtime Strategy Simulation
 URL:		https://unknown-horizons.org/
 License:	GPL
@@ -17,6 +18,7 @@ BuildRequires:	python-setuptools
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(python)
 BuildRequires:  python-pillow
+BuildRequires:  python-distro
 Requires:	python
 Requires:	python-fifengine
 Requires:	python-future
@@ -54,7 +56,7 @@ cd -
 mv %{buildroot}/%{name}.lang .
 
 %files -f %{name}.lang
-%{_bindir}/unknown-horizons
+%{_gamesbindir}/%{name}
 %{_datadir}/applications/unknown-horizons.desktop
 %dir %{_datadir}/unknown-horizons
 %{_datadir}/unknown-horizons/*.xml
