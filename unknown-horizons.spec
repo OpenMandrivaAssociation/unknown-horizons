@@ -1,10 +1,11 @@
+%global debug_package %{nil}
 %define major 0
 %define libname %mklibname fife %{major}
 %define devname %mklibname fife -d
 
 Name:		unknown-horizons
 Version:	2019.1
-Release:	3
+Release:	4
 Source0:	https://github.com/unknown-horizons/unknown-horizons/releases/download/%{version}/unknown-horizons-%{version}.tar.gz
 Patch0:		unknown-horizons-2019.1-replace-deprecated-to-distro-package.patch
 Summary:	2D Realtime Strategy Simulation
