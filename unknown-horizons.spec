@@ -5,7 +5,7 @@
 
 Name:		unknown-horizons
 Version:	2019.1
-Release:	4
+Release:	5
 Source0:	https://github.com/unknown-horizons/unknown-horizons/releases/download/%{version}/unknown-horizons-%{version}.tar.gz
 Patch0:		unknown-horizons-2019.1-replace-deprecated-to-distro-package.patch
 Summary:	2D Realtime Strategy Simulation
@@ -13,6 +13,7 @@ URL:		https://unknown-horizons.org/
 License:	GPL
 Group:		System/Libraries
 BuildRequires:  desktop-file-utils
+BuildRequires:	imagemagick
 BuildRequires:  intltool
 BuildRequires:	python-fifengine
 BuildRequires:	python-setuptools
@@ -56,6 +57,12 @@ done
 cd -
 mv %{buildroot}/%{name}.lang .
 
+# Adjust icon so KDE can see it
+for size in 16x16 32x32 48x48 64x64; do
+	mkdir -p %{buildroot}%{_datadir}/icons/hicolor/${size}/apps
+	convert %{buildroot}%{_datadir}/pixmaps/unknown-horizons.xpm -scale ${size}x${size} %{buildroot}%{_datadir}/icons/hicolor/${size}/apps/unknown-horizons.png
+done
+
 %files -f %{name}.lang
 %{_gamesbindir}/%{name}
 %{_datadir}/applications/unknown-horizons.desktop
@@ -74,6 +81,7 @@ mv %{buildroot}/%{name}.lang .
 %{_datadir}/unknown-horizons/content/packages
 %{_datadir}/unknown-horizons/content/scenarios
 %{_datadir}/pixmaps/unknown-horizons.xpm
+%{_datadir}/icons/hicolor/*/apps/unknown-horizons.png
 %{_mandir}/man6/unknown-horizons.6*
 %{python_sitelib}/horizons
 %{python_sitelib}/UnknownHorizons*.egg-info
